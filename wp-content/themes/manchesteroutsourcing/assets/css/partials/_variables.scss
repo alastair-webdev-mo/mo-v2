@@ -1,0 +1,69 @@
+/* Layout */
+
+$mw				: 1180px;
+
+/* Fonts */
+
+$f 				: "futura-pt", Helvetica, sans-serif;
+
+/* Colours */
+
+$w				: #FFFFFF;
+$b				: #000000;
+
+$p  			: #302E47;
+
+$g				: #07A56B;
+$y				: #F8E71C;
+$r				: #D0021B;
+$bl             : #3887BE;
+$lbl			: #2585C6;
+
+$gy				: #4A4A4A;
+$gy2			: #9B9B9B;
+$lg				: #EBEBEB;
+$lg2			: #F2F2F2;
+$lg3           	: #F0F0F0;
+
+$dark   		: #222222;
+$light			: #F4F6FA;
+
+/* Spectrum */
+
+$mo-r           : #CF2141;
+$mo-p			: #762975;
+$mo-o			: #E67732;
+$mo-o2			: #F2B13A;
+$mo-y			: #E2E347;
+$mo-l			: #9EC846;
+$mo-g			: #1D9C4B;
+$mo-a			: #2B9B90;
+$mo-b			: #307BB2;
+$mo-db			: #1F4280;
+$mo-dp			: #352D70;
+$mo-pi			: #D92778;
+
+$multi       	: linear-gradient(to right, #CF2141 8.3333%, #762975 16.66667%, #762975 25%, #F2B13A 25%, #F2B13A 33.3333%, #E2E347 33.3333%, #E2E347 41.6667%, #9EC846 41.6667%, #9EC846 50%, #1D9C4B 50%, #1D9C4B 58.3333%, #2B9B90 58.3333%, #2B9B90 66.66667%, #307BB2 66.6667%, #307BB2 75%, #1F4280 75%, #1F4280 83.333%, #352D70 83.333%, #352D70 91.6667%, #D92778 91.6667% );
+
+/* Sizes */
+
+$xxxxl       	: 60px;
+$xxxl			: 42px;
+$xxl			: 36px;
+$xl         	: 26px;
+$l          	: 24px;
+
+$n				: 20px;
+$m          	: 18px;
+
+$s          	: 16px;
+$xs         	: 14px;
+$xxs        	: 12px;
+$xxxs			: 10px;
+
+/* Styles */
+
+$shadow         : 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+$shadow2		: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+$all			: all 0.3s ease-in-out;

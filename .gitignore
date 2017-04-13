@@ -1,0 +1,26 @@
+# Keep these files out of the repo
+/wp-content/themes/twenty*
+/wp-content/themes/dv4/node_modules
+/wp-content/themes/dv4/assets/img/.DS_Store
+/wp-content/themes/dv4/assets/sass/HTML
+/wp-content/themes/dv4/assets/sass/Rails
+/wp-content/upgrade
+/wp-content/uploads
+/wp-snapshots/
+/wp-content/debug.log
+/phpMyAdmin*
+/sitemap.*
+*.sql
+
+# ignore useless plugins file
+wp-content/plugins/hello.php
+wp-content/plugins/index.php
+
+/wp-content/themes/manchesteroutsourcing/node_modules
+/local-config-file.php
+
+# Hidden files
+*.DS_Store
+*Thumbs.db
+*.sass-cache*
+*~imageoptim*
