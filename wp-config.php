@@ -22,8 +22,8 @@
 if ( file_exists( dirname( __FILE__ ) . '/local-config-file.php')) {
 	include( dirname( __FILE__ ) . '/local-config-file.php'); 
 } else {
-	define('DBNAME','mo-wp-wp-ahzKBv1f');
-	define('DBUSER','kvDcurilJpSQ');
+	define('DB_NAME','mo-wp-wp-ahzKBv1f');
+	define('DB_USER','kvDcurilJpSQ');
 	define('DB_PASSWORD','ally622524');
 	define('DB_HOST', 'localhost');
 }
