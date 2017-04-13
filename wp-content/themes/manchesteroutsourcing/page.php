@@ -9,7 +9,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package dv4
+ * @package manchesteroutsourcing
  */
 
 get_header(); ?>

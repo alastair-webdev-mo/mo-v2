@@ -75,7 +75,7 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 				<div class="col3">
 					<div class="page__image"></div>
 					<div class="page__title">
-						<h5>Page Title</h5>
+						<h5>Dialler Solutions</h5>
 					</div>
 				</div>
 			</div>
