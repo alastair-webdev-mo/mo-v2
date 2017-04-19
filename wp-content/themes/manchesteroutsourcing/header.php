@@ -12,12 +12,12 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 <!-- Favicon -->
-<link rel='icon' href='favicon.ico' type='image/x-icon' />
-<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
-<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="favicon-48.png" sizes="48x48" type="image/png">
-<link rel="icon" href="favicon-62.png" sizes="62x62" type="image/png">
-<link rel="icon" href="favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/icon/manifest.json">
+<link rel="mask-icon" href="/icon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
 
 <!-- Scripts -->
 <script src="https://use.typekit.net/wmx0mwh.js"></script>

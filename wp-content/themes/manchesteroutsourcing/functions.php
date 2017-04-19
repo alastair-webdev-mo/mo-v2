@@ -97,6 +97,9 @@ function aa_scripts()
         wp_deregister_script('jquery'); // Deregister WordPress jQuery
         wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js', array(), '1.11.2');
 
+      	wp_register_script('aa_validate', '//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js', array(), '1.16.0', true);
+        wp_enqueue_script('aa_validate');
+
         wp_register_script('aa_customJs', get_template_directory_uri() . '/assets/js/main.min.js'); // Custom scripts
         wp_enqueue_script('aa_customJs'); // Enqueue it!
 
@@ -403,3 +406,32 @@ function card_shortcode( $atts, $content ) {
 
 }
 add_shortcode( 'card', 'card_shortcode' );
+
+function sidebar_shortcode($atts, $content="null"){
+  extract(shortcode_atts(array('name' => ''), $atts));
+
+  ob_start();
+  dynamic_sidebar($name);
+  $sidebar= ob_get_contents();
+  ob_end_clean();
+
+  return '<div class="col col--flex col--productcards">'. $sidebar .'</div>';
+}
+
+add_shortcode('get_sidebar', 'sidebar_shortcode');
+
+// add tag and category support to pages
+function tags_categories_support_all() {
+  register_taxonomy_for_object_type('post_tag', 'page');
+  register_taxonomy_for_object_type('category', 'page');  
+}
+
+// ensure all tags and categories are included in queries
+function tags_categories_support_query($wp_query) {
+  if ($wp_query->get('tag')) $wp_query->set('post_type', 'any');
+  if ($wp_query->get('category_name')) $wp_query->set('post_type', 'any');
+}
+
+// tag and category hooks
+add_action('init', 'tags_categories_support_all');
+add_action('pre_get_posts', 'tags_categories_support_query');

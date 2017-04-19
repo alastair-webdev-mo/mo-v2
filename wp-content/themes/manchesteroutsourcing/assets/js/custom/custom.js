@@ -3,6 +3,21 @@
 
 $(document).ready(function() {
 
+$(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+
 $(".nav__search").click(function() {
 	$('.nav__searchbar').addClass('is__active');
 	$('.input--search').focus();
@@ -24,4 +39,205 @@ $(function(){
 	});
 });
 
+$('.form--validation').each(function() {
+
+$.validator.addMethod("phoneValidation", 
+  function(value, element) {
+
+  var elementID = $(element).val();
+  elementResult = $(element);
+  PhoneNumberValidation_Interactive_Validate_v2_10Begin(elementID);
+  return $(element).hasClass("success");
+}, "This phone number is invalid. Please try again.");
+
+$.validator.addMethod("emailValidation", 
+  function(value, element) {
+
+  var emailID = $(element).val();
+  elementResultEmail = $(element);
+  EmailValidation_Interactive_Validate_v2_00(emailID);
+  return $(element).hasClass("success");
+}, "This email address is invalid. Please try again.");
+
+var validCharactersRegex = /^[a-z][- a-z ]*[- ][- a-z ]*[ a-z ]$/i;
+function name__valid(value) {
+    return validCharactersRegex.test(value);
+}
+
+$.validator.addMethod("custom__name", function(value, element) {
+    return name__valid(value);
+}, 'Please give your full name.');
+
+var form = $(this);
+var formMessages = $(this).find('#form-messages');
+
+$(this).validate({
+  errorClass: "result fail",
+  validClass: "result success",
+  rules: {
+    'full-name': {
+      required: true,
+      custom__name: true,
+    },
+    email: {
+      required: true,
+      emailValidation: true,
+    },
+    'company': {
+      required: true,
+    },
+    phone: {
+      required: true,
+      phoneValidation: true,
+    },
+    'optIn': {
+      required: true,
+    }
+  },
+  messages: {
+    password: {
+      required: "This field is required",
+    },
+    'optIn': {
+      required: "",
+    } 
+  },
+  highlight: function(element) {
+      $(element).removeClass('success').addClass('fail');
+      $(element).parent().removeClass('success').addClass('fail');
+      $(element).parent().find('label').removeClass('success').addClass('fail');
+  },
+  unhighlight: function(element) {
+      $(element).removeClass('fail').addClass('success');
+      $(element).parent().addClass('success').removeClass('fail');
+      $(element).parent().find('label').removeClass('fail').addClass('success');
+  },
+  errorPlacement: function(error, element) {
+      if( element.is(":checkbox") ) {
+        error.hide();
+      } else { 
+        error.insertAfter(element);
+      }
+  },
+  submitHandler: function(form, response, data) {
+      $.ajax({
+        type: 'POST',
+        url: $(form).attr('action'),
+        data: $(form).serialize(),
+      })
+      .done(function(response) {
+        function addThanks () { 
+          url = 'thank-you';
+          history.pushState(null,null, url);
+        }
+        addThanks();
+        $(formMessages).removeClass('error');
+        $(formMessages).addClass('success');
+
+        $(formMessages).text(response);
+        $('#name, #email, #phone, #company').val('');
+      })
+      .fail(function(data) {
+        $(formMessages).removeClass('success');
+        $(formMessages).addClass('error');
+
+        // Set the message text.
+        if (data.responseText !== '') {
+          $(formMessages).text(data.responseText);
+        } else {
+          $(formMessages).text('Oops! An error occured and your message could not be sent.');
+        }         
+      });
+  },
 });
+
+});
+
+function PhoneNumberValidation_Interactive_Validate_v2_10Begin(elementID) {
+
+    var elementPhone = elementID;
+    var script = document.createElement("script"),
+        head = document.getElementsByTagName("head")[0],
+        url = "https://services.postcodeanywhere.co.uk/PhoneNumberValidation/Interactive/Validate/v2.10/json3.ws?";
+
+    url += "&Key=" + encodeURIComponent('WP74-ZE29-WJ54-PK69');
+    url += "&Phone=" + encodeURIComponent(elementPhone);
+    url += "&Country=" + encodeURIComponent('GB');
+    url += "&callback=PhoneNumberValidation_Interactive_Validate_v2_10End";
+
+    script.src = url;
+    script.onload = script.onreadystatechange = function () {
+        if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+            script.onload = script.onreadystatechange = null;
+            if (head && script.parentNode)
+                head.removeChild(script);
+        }
+    };
+    head.insertBefore(script, head.firstChild);
+}
+
+function EmailValidation_Interactive_Validate_v2_00(emailID) {
+    var elementEmail = emailID;
+    $.getJSON("http://services.postcodeanywhere.co.uk/EmailValidation/Interactive/Validate/v2.00/json3.ws?callback=?",
+    {
+        Key: 'WP74-ZE29-WJ54-PK69',
+        Email: elementEmail,
+        Timeout: 500
+    },
+    function (data) {
+        // Test for an error
+        if (data.Items.length == 1 && typeof(data.Items[0].Error) != "undefined") {
+            // Show the error message
+            alert(data.Items[0].Description);
+        }
+        else {
+            // Check if there were any items found
+            if (data.Items.length == 0)
+                alert("Sorry, there were no results");
+            else {
+                var data = data.Items[0];
+                var message = data.ResponseMessage;
+                switch (data.ResponseCode.toLowerCase()) {
+                  case "invalid":
+                  elementResultEmail.removeClass('success').addClass('fail');
+                  elementResultEmail.next().removeClass('success').addClass('fail');
+                break;
+                  case "valid":
+                  elementResultEmail.removeClass('fail').addClass('success');
+                  elementResultEmail.next().removeClass('fail').addClass('success');
+                  elementResultEmail.next().empty();
+                  elementResultEmail.parent().removeClass('fail').addClass('success');
+                break;
+                }
+            }
+        }
+    });
+}
+
+});
+
+
+function PhoneNumberValidation_Interactive_Validate_v2_10End(response) {
+
+    if (response.Items.length == 1 && typeof(response.Items[0].Error) != "undefined") {
+    }
+    else {
+        if (response.Items.length === 0)
+            alert("Sorry, there were no results");
+        else {
+          var data = response.Items[0];
+          switch (data.IsValid) {
+          case "No":
+          elementResult.removeClass('success').addClass('fail');
+          elementResult.next().removeClass('success').addClass('fail');
+          break;
+          case "Yes":
+          elementResult.removeClass('fail').addClass('success');
+          elementResult.next().removeClass('fail').addClass('success');
+          elementResult.next().empty();
+          elementResult.parent().removeClass('fail').addClass('success');
+          break;
+          }
+        }
+    }
+}

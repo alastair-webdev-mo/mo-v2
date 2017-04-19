@@ -7,8 +7,8 @@
  * @package manchesteroutsourcing
  */
 
-$page_id = $post->post_parent;
-
+$page_id = get_the_ID();
+$currentID = get_the_ID();
 $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 ?>
 
@@ -28,14 +28,6 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 <div class="main__content">
 	<div class="contain">
 		<?php the_content(); ?>
-
-		<?php if(is_page('outsourcing')) : ?>
-			<?php if ( is_active_sidebar( 'product-cards' ) ): ?>
-					<div class="col col--flex col--productcards">
-						<?php dynamic_sidebar( 'product-cards' ); ?>
-					</div>
-			<?php endif; ?>
-		<?php endif; ?>
 	</div>
 	<?php if(is_page('outsourcing')) : ?>
 	<div class="testimonals-area">
@@ -70,14 +62,35 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 		<div class="contain">
 			<h3>Related Pages</h3>
 			<p>Some related pages which may be of interest to you.</p>
-
+			
 			<div class="col col--pages">
+			<?php
+			    $args = array( 
+			    	'post_type'=> 'page', 
+			    	'numberposts' => 4, 
+			    	'orderby'=> 'rand',
+			    	'post__not_in' => array($currentID),
+			    	'taxonomy' => 'category',
+                        'field' => 'slug',
+                        'term' => 'outsourcing'
+			    );
+			    $postslist = get_posts( $args );
+			    foreach ($postslist as $post) :  setup_postdata($post);
+			    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large' );
+			    $thumb_url = $thumb['0']; 
+			?>
+
 				<div class="col3">
-					<div class="page__image"></div>
+					<div class="page__image" style="background: url('<?php echo $thumb_url; ?>');background-size:cover;background-position: center;background-repeat:no-repeat;"></div>
 					<div class="page__title">
-						<h5>Dialler Solutions</h5>
+						<?php the_title( sprintf( '<h5><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h5>' ); ?>
 					</div>
 				</div>
+
+			<?php
+				endforeach; 
+				wp_reset_postdata();
+			?>
 			</div>
 
 		</div>

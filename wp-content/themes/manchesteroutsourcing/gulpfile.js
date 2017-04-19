@@ -72,6 +72,7 @@ var minifycss    = require('gulp-uglifycss'); // Minifies CSS files.
 var autoprefixer = require('autoprefixer'); // Autoprefixing magic.
 var mmq          = require('gulp-merge-media-queries'); // Combine matching media queries into one media query definition.
 var lost         = require('lost');
+var gutil        = require('gulp-util');
 
 // JS related plugins.
 var concat       = require('gulp-concat'); // Concatenates JS files
@@ -227,7 +228,7 @@ gulp.task( 'browser-sync', function() {
       basename: jsCustomFile,
       suffix: '.min'
     }))
-    .pipe( uglify() )
+    .pipe( uglify().on('error', gutil.log) )
     .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
     .pipe( gulp.dest( jsCustomDestination ) )
     .pipe( notify( { message: 'TASK: "customJs" Completed! 💯', onLast: true } ) );

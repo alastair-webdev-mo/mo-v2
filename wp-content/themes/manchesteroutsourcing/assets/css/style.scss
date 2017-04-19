@@ -43,7 +43,19 @@ Text Domain: manchesteroutsourcing
 	margin: 0 auto;
 }
 
-p, a, ul, ol, blockquote, h1, h2, h3, h4, h5 {
+.cc {
+	color: $mo-r;
+}
+
+.bs {
+	color: $mo-l;
+}
+
+.ds {
+	color: $mo-b;
+}
+
+p, a, ul, ol, blockquote, h1, h2, h3, h4, h5, label {
 	font-family: $f;
 }
 
@@ -73,6 +85,24 @@ p, a, ul, ol, blockquote, h1, h2, h3, h4, h5 {
 	text-align: center;
 }
 
+.main__cta {
+	background-color: $mo-db;
+	padding: 60px 0;
+}
+
+.main__cta h2 {
+	font-size: $xxxxl;
+	margin-bottom: 20px;
+}
+
+.main__cta p {
+	font-size: $xl;
+}
+
+.main__cta h2, .main__cta p {
+	color: $w;
+}
+
 /* Layout */
 
 .col {
@@ -85,14 +115,27 @@ p, a, ul, ol, blockquote, h1, h2, h3, h4, h5 {
 	width: 100%;
 }
 
+.col--nomargin > * {
+	margin: 0!important;
+}
+
+.col--nomargin > .col6 {
+	width: 50%!important;
+}
+
 .col--center {
 	display: flex;
 	align-items: center;
 	width: 100%;
 }
 
+.col--center iframe {
+	display: block;
+	margin: 0 auto;
+}
+
 .col--productcards {
-	margin: 80px 0 35px;
+	margin: 35px auto 60px;
 }
 
 .col--leftfull {
@@ -339,38 +382,49 @@ nav {
 .hero {
 	width: 100%;
 	position: relative;
+	background: $b;
 	margin-bottom: 35px;
+	overflow: hidden;
 }
 
 .hero__wrapper {
-	height: 600px;
+	height: 650px;
 	position: relative;
-	background-size: cover;
-	background-position: center;
-	background-color: $mo-a;
-    background-blend-mode: multiply;
+}
+
+.hero video { 
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: 650px;
+    z-index: 0;
+ 	background: $b;
+  	background-size: cover;
+  	transition: 1s opacity;
+  	object-fit: cover;
 }
 
 .hero h2 {
-	font-size: 100px;
+	font-size: $xxxxl;
 	text-transform: uppercase;
-	text-align: center;
 	font-weight: 800;
 	letter-spacing: -2px;
 	color: $w;
 }
 
 .hero p {
-	text-align: center;
-	font-size: $l;
+	font-size: $n;
 	color: $w;
 }
 
 .hero__wrapper--home .hero__content {
 	position: absolute;
-	top: 45%;
-	transform: translateY(-45%);
-	padding: 0 120px;
+	top: 40%;
+	left: 50%;
+	transform: translateY(-40%) translateX(-50%);
+	width: 55%;
+	text-align:center;
 }
 
 .hero__wrapper--home .hero__content .highlight {
@@ -381,12 +435,23 @@ nav {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	padding: 20px 0;
+	padding: 20px 0 0;
 	opacity: 0.9;
 }
 
-.hero__wrapper--home .hero__bottom p {
-	font-size: $n;
+.hero__bottom--shadow {
+	position: absolute;
+	background-color: $bl; 
+	width: 1000px;
+    height: 1000px;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    background-color: rgba(33, 114, 171,0.1);
+    transform: translateX(-50%);
+    box-shadow: 10px -10px 500px rgba(33, 114, 171, 0.9);
+    border-radius: 500px;
+    z-index: -1;
 }
 
 .hero__wrapper--home .hero__bottom a {
@@ -405,6 +470,112 @@ nav {
 
 .hero__wrapper--home .hero__bottom .arrow-down:hover {
 	top: 10px;
+}
+
+.hero__opt--o {
+	border-bottom: 5px solid $mo-pi;
+}
+
+.hero__opt--v {
+	border-bottom: 5px solid $mo-p;
+}
+
+.hero__opt {
+	position: relative;
+}
+
+.hero__opt a.link__opt {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.hero__opt p {
+	text-align: left;
+	color: $gy3;
+	font-size: $s;
+	font-weight: 600;
+	transition: $all;
+}
+
+.hero__opt .opt__header {
+	padding-bottom: 5px;
+	margin: 0 20px 10px;
+}
+
+.hero__opt .opt__header {
+	border-bottom: 1px solid $gy3;
+}
+
+.hero__opt .opt__products {
+	margin: 0 20px;
+}
+
+.hero__opt .opt__products ul {
+	list-style: none;
+	display: flex;
+	margin-bottom: 30px;
+}
+
+.hero__opt .opt__products ul li {
+	color: $gy3;
+	font-size: $s;
+	padding-right: 20px;
+	margin-right: 20px;
+	border-right: 1px solid $gy3;
+	line-height: 15px;
+	transition: $all;
+}
+
+.hero__opt .opt__products ul li:last-child {
+	padding: 0;
+	border-right: 0px solid transparent;
+}
+
+.hero__opt .opt__products h4 {
+	color: $gy3;
+	font-size: $xs;
+	text-transform: uppercase;
+	margin-bottom: 3px;
+	transition: $all;
+}
+
+.hero__opt:hover h4, .hero__opt:hover p, .hero__opt:hover .opt__products ul li {
+	color: $w;
+}
+
+.hero__awards {
+	background-color: $lg2;
+	padding: 35px 20px;
+}
+
+.hero__awards p {
+	color: $b;
+	text-align: right;
+	opacity: 0.5;
+}
+
+.button--start {
+	background-color: $mo-g;
+	color: $w;
+	padding: 15px 25px;
+	margin-top: 25px;
+	font-size: $xs;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	box-shadow: $shadow;
+	font-family: $f;
+}
+
+.col--text .button--start {
+	margin-top: 0;
+}
+
+.col--center .col--text {
+	padding-bottom: 0;
 }
 
 /* Default */
@@ -530,10 +701,9 @@ nav {
 }
 
 .box h3 {
-	text-align: center;
 	font-size: $xxxl;
 	margin-bottom: 20px;
-	padding-top: 20px;
+	color: $dark;
 }
 
 .box--dark h3, .box--dark h4 {
@@ -541,9 +711,8 @@ nav {
 }
 
 .box p {
+	color: $dark;
 	font-size: $m;
-	text-align: center;
-	padding: 0 60px;
 	margin-bottom: 35px;
 }
 
@@ -606,6 +775,61 @@ ul.col--flex li {
 	font-family: $f;
 	padding: 20px 0;
 	flex: 1;
+}
+
+ul.col--links {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+ul.col--links li {
+	text-align: left;
+	margin-right: 20px;
+	padding: 20px 0;
+	box-shadow: none;
+	transition: $all;
+	position: relative;
+}
+
+ul.col--links li:last-child {
+	margin-right: 0;
+}
+
+ul.col--links li h4 {
+	display: inline-block;
+	font-size: $s;
+	margin-bottom: 8px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid $light;
+}
+
+ul.col--links li i {
+	margin-right: 10px;
+	font-size: $n;
+}
+
+ul.col--links li h4 i {
+	margin-left: 20px;
+	font-size: $xs;
+	transition: $all;
+}
+
+ul.col--links li:hover h4 i {
+	margin-left: 30px;
+}
+
+ul.col--links li a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+ul.col--links li p {
+	margin-left: 37px;
+	color: $dark;
+	padding-right: 40px;
 }
 
 ul.col--flex a {
@@ -802,6 +1026,25 @@ h3.background span {
 	padding: 60px 150px 60px 50px;
 }
 
+.col--text {
+	position: relative;
+	padding-bottom: 35px;
+}
+
+.col--text p {
+	font-size: $l;
+	padding-right: 30px;
+}
+
+.col--right {
+	text-align: right;
+}
+
+.col--right p {
+	padding-right: 0;
+	padding-left: 30px;
+}
+
 /* Buttons */
 
 .button {
@@ -914,6 +1157,673 @@ span+a button {
 .page__title h5 {
 	font-weight: 400;
 	font-size: $l;
+}
+
+.right-double-quote-solid.icon, .left-double-quote-solid.icon {
+	position: relative;
+	color: $light;
+	margin: 0 auto;
+	transform: scale(2.5);
+}
+
+.testimonial--light {
+	background-color: $w;
+	margin: 20px auto;
+}
+
+.testimonial--light p {
+	color: $gy3;
+	margin-bottom: 0;
+	font-size: $m;
+}
+
+.testimonial--light .name {
+	color: $dark;
+	display: block;
+	font-family: $f;
+	font-size: $m;
+}
+
+/* News Area */
+
+.news__wrapper {
+	padding-bottom: 65px;
+}
+
+.news__wrapper .col, .alm-reveal {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.news__post {
+	position: relative;
+}
+
+.news__main .news__post {
+	margin-bottom: 35px;
+}
+
+.news__post .col {
+	height: 100%;
+}
+
+.news__post .col > *, .alm-reveal > * {
+	overflow: hidden;
+	position: relative;
+}
+
+.news__overlay {
+	background-color: rgba(0,0,0,0.4);
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.news__link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 120;
+}
+
+.news__post .news__image {
+	width: 100%;
+	height: 150px;
+}
+
+.news__main .news__post .news__image {
+	height: 200px;
+}
+
+.news__post article {
+	background: $w;
+	height: 100%;
+}
+
+.news__main .news__post article {
+	height: 250px;
+}
+
+.news__post article .news__title h3 {
+	text-align: center;
+	font-size: $n;
+	padding: 25px 15px;
+	line-height: 26px;
+}
+
+.news__post article .news__title h3 a {
+	color: $b;
+}
+
+.news__post .news__meta {
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	padding: 0 15px 35px;
+}
+
+.news__post .news__meta span {
+	color: $gy;
+	text-transform: uppercase;
+	font-family: $f;
+	font-weight: 600;
+}
+
+.news__post .news__meta span.news__meta__author {
+	margin-bottom: 5px;
+	display: block;
+}
+
+.news__post .news__meta span.news__meta__cat {
+	display: flex;
+	justify-content: center;
+}
+
+.news__post .news__meta span.news__meta__cat a {
+	color: $b;
+}
+
+.news__post .news__meta span.news__meta__cat a:hover {
+	text-decoration: underline;
+}
+
+.news__post .news__meta span.news__meta__cat ul.post-categories {
+	margin-right: 8px;
+}
+
+.news__post .news__meta span.news__meta__cat .news__time {
+	margin-left: 8px;
+}
+
+
+.news__first .news__image {
+	width: 100%;
+	height: 350px;
+}
+
+.news__first article {
+	position: absolute;
+	bottom: 0;
+	height: auto;
+	width: 100%;
+	z-index: 110;
+	padding: 0 35px 35px;
+	background: transparent;
+}
+
+.news__first article .news__title h3 {
+	text-align: center;
+	color: $w;
+	font-size: $l;
+	padding-bottom: 15px;
+}
+
+.news__first .news__meta {
+	text-align: center;
+	position: relative;
+	left: auto;
+	padding: 0;
+}
+
+.news__first .news__meta span {
+	color: $lg;
+	text-transform: uppercase;
+	font-family: $f;
+	font-weight: 600;
+}
+
+.news__first .news__meta span.news__meta__author {
+	margin-bottom: 5px;
+	display: block;
+}
+
+.news__first .news__meta span.news__meta__cat {
+	display: flex;
+	justify-content: center;
+}
+
+.news__first .news__meta span.news__meta__cat a {
+	color: $w;
+}
+
+.news__first .news__meta span.news__meta__cat a:hover {
+	text-decoration: underline;
+}
+
+.news__first .news__meta span.news__meta__cat ul.post-categories {
+	margin-right: 8px;
+}
+
+ul.post-categories {
+	list-style: none;
+}
+
+.alm-listing li {
+	padding: 0;
+}
+
+.alm-btn-wrap {
+    padding: 10px 0 30px;
+}
+
+button.alm-load-more-btn {
+    font-family: $f;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    background: $w;
+    color: $b;
+    border: none;
+    border-radius: 0px;
+    margin: 0;
+    outline: 0;
+}
+
+button.alm-load-more-btn.done {
+    cursor: default;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    background-color: $w;
+    box-shadow: none !important;
+}
+
+button.alm-load-more-btn:hover {
+	color: $b;
+}
+
+.news__categories {
+	width: 100%;
+	background: $lg3;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-bottom: 35px;
+}
+
+.news__categories h4 {
+	margin-right: 20px;
+	font-size: $xs;
+	flex: 1;
+    align-self: flex-end;
+    text-align: right;
+    background: white;
+    padding: 20px;
+}
+
+.news__categories li {
+	list-style: none;
+	margin-right: 20px;
+}
+
+.news__categories li a {
+	font-size: $xs;
+}
+
+.news__categories li a:hover {
+	text-decoration: underline;
+}
+
+/* Form Elements */
+
+.form--contain {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+fieldset {
+	border: 0;
+	padding: 0;
+	margin: 0 0 20px;
+	position: relative;
+}
+
+fieldset label {
+	display: inline-block;
+	padding: 0 10px;
+	font-size: $m;
+	color: $w;
+	background-color: $gy;
+}
+
+fieldset label.title {
+	position: relative;
+	top: 8px;
+	font-weight: 600;
+	z-index: 100;
+}
+
+.main__cta fieldset label {
+	background-color: $mo-db;
+}
+
+fieldset input {
+	width: 100%;
+    border: 2px solid $w;
+    margin: 0 0 10px;
+    padding: 10px 35px 10px 5px;
+    color: $gy;
+    border-radius: 2px;
+    position: relative;
+    appearance: none;
+    outline: 0;
+    font-size: 16px;
+    font-weight: 400;
+    transition: all 0.25s ease-in-out;
+}
+
+fieldset .input__wrap {
+    position: relative;
+    height: 50px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+fieldset input:focus {
+	border: 2px solid $w;
+}
+
+fieldset input:hover {
+	border: 2px solid $w;
+}
+
+fieldset input.success {
+	border: 2px solid $g;
+}
+
+fieldset input.fail {
+	border: 2px solid $r;
+}
+
+fieldset .result:before {
+	margin-right: 0;
+    position: absolute;
+    font-size: 20px;
+    background: transparent;
+    width: 20px;
+    top: 50%;
+    font-family: FontAwesome;
+    z-index: 10;
+    right: 10px;
+}
+
+fieldset label.fail {
+	font-size: $xxs;
+	text-align:right;
+	padding: 0;
+	color: $w;
+	text-transform:uppercase;
+	display: block;
+	font-weight: 800;
+}
+
+fieldset label.fail:before {
+    content: "\f00d";
+    transform: translateY(-50%);
+    color: $r;
+}
+
+fieldset .input__wrap.success {
+	padding: 0;
+	margin: 0;
+}
+
+fieldset .input__wrap.success:before {
+	content: "\f00c";
+	font-family: "FontAwesome";
+	transform: translateY(-50%);
+	color: $g;
+}
+
+fieldset .input__wrap.success:before {
+	margin-right: 0;
+    position: absolute;
+    font-size: 20px;
+    background: transparent;
+    width: 20px;
+    top: 50%;
+    font-family: FontAwesome;
+    z-index: 10;
+    right: 10px;
+}
+
+fieldset .input {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin: 0 0 5px;
+    max-width: 350px;
+    width: 100%;
+    vertical-align: top;
+    height: 48px;
+}
+
+fieldset .input__field {
+    position: relative;
+    display: block;
+    float: right;
+    height: 50px;
+    padding: 0 10px;
+    border: 2px solid $w;
+    border-radius: 0;
+    color: $w;
+    font-family: $f;
+    -webkit-appearance: none;
+}
+
+fieldset .input__select {
+	position: relative;
+	display: block;
+	height: 50px;
+	padding: 0.2em 0.8em;
+	border: 2px solid $w;
+	border-radius: 0;
+	background: $light;
+	color: $gy;
+	-webkit-appearance: none;
+	font-size: $s;
+	outline: 0;
+	margin: 0 0 10px;
+}
+
+fieldset .input__select__wrap:before {
+	content: '\f078';
+	font-family: FontAwesome;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 20px;
+	font-size: $s;
+	color: $gy2;
+	z-index: 50;
+	pointer-events: none;
+}
+
+fieldset .input__field.fail, fieldset .input__select.fail {
+	border: 2px solid $r;
+}
+
+fieldset .input__field.success, fieldset .input__select.success {
+	border: 2px solid $g;
+}
+
+.main__cta ::-webkit-input-placeholder {
+    color: $lg;
+}
+
+.main__cta  ::-moz-placeholder {
+    color: $lg;
+}
+
+.main__cta  ::-ms-placeholder {
+    color: $lg;
+}
+
+.main__cta  ::placeholder {
+    color: $lg;
+}
+
+@-webkit-keyframes autofill {
+    to {
+        color: $w;
+        background: transparent;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+fieldset .input__wrap--icon {
+	position: relative;
+}
+
+fieldset .input__wrap--icon:before {
+	content: '\f002';
+	font-family: "FontAwesome";
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 100;
+	color: $p;
+}
+
+fieldset .input__wrap--icon input {
+	padding: 10px 35px 10px 35px;
+}
+
+fieldset .input__check {
+	opacity: 0;
+    position: absolute;
+    outline: 0;
+    z-index: 50;
+    height: 100%;
+    width: 100%;
+    left: 5px;
+    -webkit-appearance: inherit;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+fieldset .input__check+.input__label--check:before {
+    content: '';
+    background: $light;
+    border: 2px solid $mo-db;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 26px;
+    height: 26px;
+    padding: 1px 3px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+fieldset .input__check:checked+.input__label--check:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    background: $light;
+    color: $g;
+    font-size: $s;
+    border: 2px solid $g;
+}
+
+fieldset .input__label--check span {
+	display: inline-block;
+    width: 90%;
+    vertical-align: top;
+}
+
+fieldset .input__wrap--checkbox {
+    position: relative;
+    display: inline-block;
+    height: auto;
+}
+
+fieldset .input__wrap--fill {
+    padding: 10px;
+    background: $gy;
+    border-radius: 2px;
+}
+
+fieldset label.input__label--check {
+	margin-bottom: 0;
+	font-size: $s;
+	padding: 0;
+}
+
+fieldset label.input__label--check.fail {
+	text-align: left;
+	color: $r;
+	font-weight: 600;
+	text-transform: none;
+}
+
+fieldset .input__check.success:checked+.input__label--check:before {
+	border: 2px solid $g;
+	color: $g;
+}
+
+fieldset .input__check.fail:checked+.input__label--check:before, fieldset .input__check.fail+.input__label--check:before {
+	content: "";
+	border: 2px solid $r;
+	color: $r;
+	transform: none;
+}
+
+fieldset .input__wrap--checkbox.success:before {
+	content: '';
+}
+
+fieldset.radio {
+	max-width: none;
+}
+
+fieldset .input__radio {
+    position: absolute;
+    outline: 0;
+    z-index: 50;
+    height: 26px;
+    width: 100%;
+    left: 5px;
+    -webkit-appearance: inherit;
+    cursor: pointer;
+    margin-bottom: 0;
+    opacity: 0;
+}
+
+fieldset .input__wrap--radio {
+	display: inline-block;
+}
+
+fieldset .input__radio+.input__label--radio:before {
+    content: '';
+    background: $light;
+    border: 2px solid $gy;
+    border-radius: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 26px;
+    height: 26px;
+    padding: 3px 3px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+fieldset .input__radio:checked+.input__label--radio:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    background: $light;
+    color: $p;
+    font-size: 16px;
+    border: 2px solid $gy;
+}
+
+fieldset .input__radio.success:checked+.input__label--radio:before {
+	border: 2px solid $g;
+	color: $g;
+}
+
+fieldset .input__radio.fail:checked+.input__label--radio:before {
+	content: "";
+	border: 2px solid $r;
+	color: $r;
+}
+
+.button--blue {
+	background-color: $mo-a;
+	color: $w;
+	padding: 15px 25px;
+	margin-top: 10px;
+	font-size: $xs;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	box-shadow: $shadow;
+	font-family: $f;
+}
+
+form .submit {
+	text-align: center;
+	display: block;
+}
+
+.form__submit i {
+	margin-left: 10px;
+	font-size: $xxs;
+}
+
+span.opt {
+    margin-top: 25px;
+    display: block;
 }
 
 /* Footer */
