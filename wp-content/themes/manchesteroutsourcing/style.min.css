@@ -1597,6 +1597,7 @@ p,a,ul,ol,blockquote,h1,h2,h3,h4,h5,label,span{font-family:"futura-pt",Helvetica
 .col--nomargin>.col6{width:50% !important}
 .col--center{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;width:100%}
 .col--center iframe{display:block;margin:0 auto}
+.col--center .col--right iframe{margin:0;margin-left:auto}
 .col--productcards{margin:35px auto 60px}
 .col--leftfull{width:100vw;margin:60px auto 60px -50vw;position:relative;left:50%;padding-left:110px}
 .col--rightfull{width:100vw;margin:0 -50vw 60px auto;position:relative;right:0;padding-right:110px}
@@ -1833,9 +1834,9 @@ h3.background span{background-color:#000;padding:5px 20px 5px 110px}
 .testimonials .testimonial__content p.author{font-style:none;font-weight:200}
 .bespoke__content{padding:60px 150px 60px 50px}
 .col--text{position:relative;padding-bottom:35px}
-.col--text p{font-size:18px;padding-right:30px}
+.col--text p{font-size:18px;padding-right:160px}
 .col--right{text-align:right}
-.col--right p{padding-right:0;padding-left:30px}
+.col--right p{padding-right:0;padding-left:160px}
 .grid-item{padding:60px 20px;color:#222;min-height:500px}
 .grid-item h3{color:#222;font-size:24px;text-transform:uppercase;margin-bottom:20px;padding-right:80px}
 .grid-item p{color:#222;font-size:18px;padding-right:80px}

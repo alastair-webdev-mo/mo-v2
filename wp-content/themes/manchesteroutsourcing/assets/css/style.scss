@@ -144,6 +144,11 @@ p, a, ul, ol, blockquote, h1, h2, h3, h4, h5, label, span {
 	margin: 0 auto;
 }
 
+.col--center .col--right iframe {
+	margin: 0;
+    margin-left: auto;
+}
+
 .col--productcards {
 	margin: 35px auto 60px;
 }
@@ -1214,7 +1219,7 @@ h3.background span {
 
 .col--text p {
 	font-size: $m;
-	padding-right: 30px;
+	padding-right: 160px;
 }
 
 .col--right {
@@ -1223,7 +1228,7 @@ h3.background span {
 
 .col--right p {
 	padding-right: 0;
-	padding-left: 30px;
+	padding-left: 160px;
 }
 
 .grid-item {
