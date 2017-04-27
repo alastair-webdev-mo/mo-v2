@@ -4,13 +4,12 @@
  */
 
 get_header();
-
 ?>
 
 <main>
 	<div class="wrapper">
 
-		<div class="page__top" style="background-image:url(<?php echo $url; ?>);">
+		<div class="page__top page--news" style="background-image:url(<?php echo $url; ?>);">
 			<div class="contain">
 				<div class="page__breadcrumbs">
 					<?php if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb('<div id="breadcrumbs">','</div>'); } ?>
@@ -18,7 +17,6 @@ get_header();
 				<div class="page__title">
 					<h2>News</h2>
 				</div>
-				<hr class="page__hr">
 			</div>
 		</div>
 
@@ -70,17 +68,24 @@ get_header();
 			<div class="contain">
 				<div class="news__categories">
 					<h4>Filter by category</h4>
-					<?php wp_list_categories( array(
-						'orderby' => 'name',
-						'hierarchical' => false,
-						'title_li' => '',
-					) ); ?> 
+
+					<ul>
+					<?php 
+					    $categories = get_categories( array(
+						    'orderby' => 'name'
+						) );
+					?>
+					<?php 
+					  foreach ( $categories as $category ) {
+						echo '<li id="cat-item cat-' . $category->term_id . '"><a class="'.$category->slug.' ajax" href="'. $category->slug . '" onclick="cat_ajax_get(' .$category->term_id . ');">' . $category->name . '</a></li>';
+						    };
+					?>
 				</div>
 				<div class="col">
 					<?php $the_query = new WP_Query( array(
 						'post_type' => 'post',
 						'posts_per_page' => 6,
-						'offset' => 1,
+						'offset' => 3,
 						)); 
 					?>
 					<?php if ( $the_query->have_posts() ) : ?>
@@ -95,8 +100,7 @@ get_header();
 
 					<?php wp_reset_postdata(); ?>
 					
-
-					<?php echo do_shortcode('[ajax_load_more id="3006704007" container_type="div" post_type="post" posts_per_page="6" button_label="Load More News" button_loading_label="Loading News..."]'); ?>
+					<?php echo do_shortcode('[ajax_load_more id="3006704007" container_type="div" post_type="post" offset="7" posts_per_page="6" button_label="Load More News" button_loading_label="Loading News..."]'); ?>
 				</div>
 			</div>
 		</div>

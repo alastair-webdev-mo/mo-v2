@@ -1,0 +1,1 @@
+<?php echo do_shortcode('[ajax_load_more id="3006704007" container_type="div" post_type="post" posts_per_page="6" button_label="Load More News" button_loading_label="Loading News..."]'); ?>

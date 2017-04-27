@@ -8,19 +8,21 @@
  */
 
 $page_id = get_the_ID();
+$slug = $post->post_name;
 $currentID = get_the_ID();
 $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 ?>
 
-<div class="page__top" style="background-image:url(<?php echo $url; ?>);">
+<div class="page__top page--<?php echo $slug; ?>" style="background-image:url(<?php echo $url; ?>);">
 	<div class="contain">
 		<div class="page__breadcrumbs">
-			<?php if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb('<div id="breadcrumbs">','</div>'); } ?>
+			<?php if ( is_page() && $post->post_parent ) : ?>
+				<?php if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb('<div id="breadcrumbs">','</div>'); } ?>
+			<?php endif; ?>
 		</div>
 		<div class="page__title">
 			<h2><?php the_title(); ?></h2>
 		</div>
-		<hr class="page__hr">
 	</div>
 </div>
 
@@ -57,7 +59,7 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 		</div>
 	</div>
 	<?php endif; ?>
-	<?php if ( $post->post_parent === $page_id ) : ?>
+	<?php if ( $post->post_parent === 85 ) : ?>
 	<div class="related-pages related-pages--contain">
 		<div class="contain">
 			<h3>Related Pages</h3>
@@ -96,5 +98,129 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 		</div>
 	</div>
 	<?php endif; ?>
-
 </div>
+
+<?php if ( $post->post_parent === 85 ) : ?>
+<div class="main__cta">
+	<div class="contain">
+		<div class="col">
+			<div class="col6">
+				<h2>Talk to us</h2>
+				<p>All businesses have a story to tell. Some are tales of exciting opportunities and consistent progress; others are of ups and downs and learning the hard way.</p>
+			</div>
+			<div class="col6">
+				<form class="form form--validation form--contain" action="" method="POST">
+					<div class="form__wrapper">
+						<fieldset>
+							<label class="title">Full name</label>
+							<span class="input__wrap">
+								<input type="text" id="name" class="input__field" placeholder="What's your full name?" name="full-name" required>
+							</span>
+						</fieldset>
+						<fieldset>
+							<label class="title">Interested in...</label>
+							<span class="input__wrap input__select__wrap">
+								<select name="interest" class="input__select">
+									<option value="contact-centres">Contact Centres</option>
+									<option value="business-services">Business Services</option>
+									<option value="dialler-solutions">Dialler Solutions</option>
+									<option value="venture-building">Venture Building</option>
+								</select>
+							</span>
+						</fieldset>
+						<fieldset>
+							<label class="title">Company</label>
+							<span class="input__wrap">
+								<input type="text" id="company" class="input__field" placeholder="Your company..." name="company" required>
+							</span>
+						</fieldset>
+						<fieldset>
+							<label class="title">Email address</label>
+							<span class="input__wrap">
+								<input type="email" id="email" class="input__field" placeholder="Your email address..." name="email" required>
+							</span>
+						</fieldset>
+						<fieldset>
+							<label class="title">Phone</label>
+							<span class="input__wrap">
+								<input type="tel" id="phone" class="input__field input__phone" placeholder="Best number to contact you on..." name="phone" required>
+							</span>
+						</fieldset>
+						<span class="submit">
+							<button class="button button--blue form__submit" name="submit">Start your journey <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+						</span>
+						<span class="opt">
+							<fieldset> 
+								<span class="input__wrap input__wrap--checkbox">
+									<input type="checkbox" name="optIn" class="input__check">
+									<label for="check" class="input__label--check">
+										<span>This tick indicates your consent to receive contact from one of our trusted funeral planning experts to discuss your wishes and requirements by telephone, email or SMS.</span>
+									</label>
+								</span>
+							</fieldset>
+						</span>								
+					</div>
+					<div id="form-messages"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+
+<?php if (is_page('about-us')) : ?>
+<div class="main__cta">
+	<div class="contain">
+		<div class="col">
+			<div class="col6">
+				<h2>Get in touch with us</h2>
+				<p>All businesses have a story to tell. Some are tales of exciting opportunities and consistent progress; others are of ups and downs and learning the hard way.</p>
+			</div>
+			<div class="col6">
+				<form class="form form--validation form--contain" action="" method="POST">
+					<div class="form__wrapper">
+						<fieldset>
+							<label class="title">Full name</label>
+							<span class="input__wrap">
+								<input type="text" id="name" class="input__field" placeholder="What's your full name?" name="full-name" required>
+							</span>
+						</fieldset>
+						<fieldset>
+							<label class="title">Company</label>
+							<span class="input__wrap">
+								<input type="text" id="company" class="input__field" placeholder="Your company..." name="company" required>
+							</span>
+						</fieldset>
+						<fieldset>
+							<label class="title">Email address</label>
+							<span class="input__wrap">
+								<input type="email" id="email" class="input__field" placeholder="Your email address..." name="email" required>
+							</span>
+						</fieldset>
+						<fieldset>
+							<label class="title">Phone</label>
+							<span class="input__wrap">
+								<input type="tel" id="phone" class="input__field input__phone" placeholder="Best number to contact you on..." name="phone" required>
+							</span>
+						</fieldset>
+						<span class="submit">
+							<button class="button button--blue form__submit" name="submit">Start your journey <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+						</span>
+						<span class="opt">
+							<fieldset> 
+								<span class="input__wrap input__wrap--checkbox">
+									<input type="checkbox" name="optIn" class="input__check">
+									<label for="check" class="input__label--check">
+										<span>This tick indicates your consent to receive contact from one of our trusted funeral planning experts to discuss your wishes and requirements by telephone, email or SMS.</span>
+									</label>
+								</span>
+							</fieldset>
+						</span>								
+					</div>
+					<div id="form-messages"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>

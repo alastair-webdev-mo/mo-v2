@@ -146,6 +146,17 @@ function aa_enqueue_comments_reply() {
 
 remove_filter( 'the_content', 'wpautop' );
 
+add_filter('the_content','if_is_post');
+
+function if_is_post($content){
+if(is_singular('post'))
+    return wpautop($content);
+elseif (is_singular('job'))
+	return wpautop($content);
+else
+    return $content;//no autop
+}
+
 add_action( 'widgets_init', 'theme_slug_widgets_init' );
 function theme_slug_widgets_init() {
     register_sidebar( array(
@@ -155,6 +166,45 @@ function theme_slug_widgets_init() {
         'before_widget' => '<div class="col4">',
         'after_widget'  => '</div>',
     ) );
+}
+
+add_action( 'wp_ajax_nopriv_load-filter', 'prefix_load_cat_posts' );
+add_action( 'wp_ajax_load-filter', 'prefix_load_cat_posts' );
+function prefix_load_cat_posts () {
+    $cat_id = $_POST[ 'cat' ];
+    $args = array (
+        'cat' => $cat_id,
+        'posts_per_page' => -1,
+        'order' => 'DESC'
+      );
+
+    global $post;
+
+    $posts = get_posts( $args );
+
+    ob_start ();
+
+    foreach ( $posts as $post ) {
+    setup_postdata( $post );
+
+   	$post_id = get_the_category( $post->ID );
+
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large' );
+    $url = $thumb['0']; 
+
+    ?>
+<div class="col4 news__post">
+<?php get_template_part( 'parts/posts/post', get_post_format() ); ?>
+</div>
+
+<?php } wp_reset_postdata();
+
+$response = ob_get_contents();
+ob_end_clean();
+
+echo $response;
+
+die(1);
 }
 
 /**
@@ -339,6 +389,32 @@ function col_wrapper($atts,$content,$tag){
 }
 add_shortcode('col_wrapper','col_wrapper');
 
+function grid($atts,$content,$tag){
+	
+	//collect values, combining passed in values and defaults
+	$values = shortcode_atts(array(
+		'align-items' => '',
+		'flex' => '',
+		'class' => '',
+	),$atts);  
+	
+	
+	//based on input determine what to return
+	$output = '';
+	if($values['align-items'] == 'center'){
+		$output = '<div class="col col--center col--nomargin '. $atts['class'].'">'.do_shortcode($content).'</div>';
+	}
+	else if($values['flex'] == 'true'){
+		$output = '<div class="col col--flex col--nomargin '. $atts['class'].'">'.do_shortcode($content).'</div>'; 
+	}
+	else{
+		$output = '<div class="col col--nomargin '. $atts['class'].'">'.do_shortcode($content).'</div>'; 
+	}
+	return $output;
+	
+}
+add_shortcode('grid','grid');
+
 function button_shortcode( $atts ) {
 
 	// Attributes
@@ -408,17 +484,74 @@ function card_shortcode( $atts, $content ) {
 add_shortcode( 'card', 'card_shortcode' );
 
 function sidebar_shortcode($atts, $content="null"){
-  extract(shortcode_atts(array('name' => ''), $atts));
+  extract(shortcode_atts(array('name' => '', 'width' => '',), $atts));
 
   ob_start();
   dynamic_sidebar($name);
   $sidebar= ob_get_contents();
   ob_end_clean();
 
-  return '<div class="col col--flex col--productcards">'. $sidebar .'</div>';
+  $output = '';
+
+  if ( $atts['width'] == 'full' ) {
+  	$output = '<div class="col col--flex col--productcards col--'. $atts['width'] .'"><div class="contain">'. $sidebar .'</div></div>';
+  } else {
+  	$output = '<div class="col col--flex col--productcards>'. $sidebar .'</div>';
+  }
+
+  return $output;
 }
 
 add_shortcode('get_sidebar', 'sidebar_shortcode');
+
+function generalform( $atts ) {
+    $a = shortcode_atts( array(
+        'class' => '',
+        'action' => '',
+    ), $atts );
+
+    return '<form class="form '. $atts['class'] .'" action="'. $atts['action'] .'" method="POST">
+	<div class="form__wrapper">
+	<fieldset>
+		<label class="title">Full name</label>
+		<span class="input__wrap">
+			<input type="text" id="name" class="input__field" placeholder="What is your full name?" name="full-name" required>
+		</span>
+	</fieldset>
+	<fieldset>
+		<label class="title">Company</label>
+		<span class="input__wrap">
+			<input type="text" id="company" class="input__field" placeholder="Your company..." name="company" required>
+		</span>
+	</fieldset>
+	<fieldset>
+	<label class="title">Email address</label>
+		<span class="input__wrap">
+			<input type="email" id="email" class="input__field" placeholder="Your email address..." name="email" required>
+		</span>
+	</fieldset>
+	<fieldset>
+	<label class="title">Phone</label>
+		<span class="input__wrap">
+			<input type="tel" id="phone" class="input__field input__phone" placeholder="Best number to contact you on..." name="phone" required>
+		</span>
+	</fieldset>
+	<span class="submit">
+		<button class="button button--blue form__submit" name="submit">Start your journey <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+	</span>
+	<span class="opt">
+		<fieldset> 
+			<span class="input__wrap input__wrap--checkbox">
+				<input type="checkbox" name="optIn" class="input__check">
+				<label for="check" class="input__label--check">
+					<span>This tick indicates your consent to receive contact from one of our trusted funeral planning experts to discuss your wishes and requirements by telephone, email or SMS.</span>
+				</label>
+			</span>
+		</fieldset>
+	</span>								
+</div><div id="form-messages"></div></form>';
+}
+add_shortcode( 'genform', 'generalform' );
 
 // add tag and category support to pages
 function tags_categories_support_all() {
@@ -435,3 +568,98 @@ function tags_categories_support_query($wp_query) {
 // tag and category hooks
 add_action('init', 'tags_categories_support_all');
 add_action('pre_get_posts', 'tags_categories_support_query');
+
+// Register Custom Post Type
+function custom_post_type() {
+
+	$labels = array(
+		'name'                  => _x( 'Jobs', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'Job', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'Jobs', 'text_domain' ),
+		'name_admin_bar'        => __( 'Job', 'text_domain' ),
+		'archives'              => __( 'Item Archives', 'text_domain' ),
+		'attributes'            => __( 'Item Attributes', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent Event:', 'text_domain' ),
+		'all_items'             => __( 'All Jobs', 'text_domain' ),
+		'add_new_item'          => __( 'Add New Job Vacancy', 'text_domain' ),
+		'add_new'               => __( 'Add New', 'text_domain' ),
+		'new_item'              => __( 'New Job', 'text_domain' ),
+		'edit_item'             => __( 'Edit Job', 'text_domain' ),
+		'update_item'           => __( 'Update Job', 'text_domain' ),
+		'view_item'             => __( 'View Job', 'text_domain' ),
+		'view_items'            => __( 'View Jobs', 'text_domain' ),
+		'search_items'          => __( 'Search Jobs', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into event', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this event', 'text_domain' ),
+		'items_list'            => __( 'Jobs list', 'text_domain' ),
+		'items_list_navigation' => __( 'Jobs list navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter events list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'Job', 'text_domain' ),
+		'description'           => __( 'This is an job post type.', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields', 'post-formats', ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'query_var' 			=> true,
+		'menu_position'         => 7,
+		'menu_icon'           	=> 'dashicons-sticky',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => 'jobs',		
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'job', $args );
+
+}
+add_action( 'init', 'custom_post_type', 0 );
+
+function create_event_taxonomies() {
+    $labels = array(
+        'name'              => _x( 'Categories', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Category', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Categories' ),
+        'all_items'         => __( 'All Categories' ),
+        'parent_item'       => __( 'Parent Category' ),
+        'parent_item_colon' => __( 'Parent Category:' ),
+        'edit_item'         => __( 'Edit Category' ),
+        'update_item'       => __( 'Update Category' ),
+        'add_new_item'      => __( 'Add New Category' ),
+        'new_item_name'     => __( 'New Category Name' ),
+        'menu_name'         => __( 'Categories' ),
+    );
+
+    $args = array(
+        'hierarchical'      => true, // Set this to 'false' for non-hierarchical taxonomy (like tags)
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'jobs' ),
+    );
+
+    register_taxonomy( 'jobs_categories', array( 'job' ), $args );
+}
+add_action( 'init', 'create_event_taxonomies', 0 );
+
+function awesome_excerpt($text, $raw_excerpt) {
+    if( ! $raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        $text = substr( $content, 0, strpos( $content, '</p>' ) + 4 );
+    }
+    $text = preg_replace("/<img[^>]+\>/i", "", $text); 
+    return $text;
+}
+add_filter( 'wp_trim_excerpt', 'awesome_excerpt', 10, 2 );

@@ -33,6 +33,25 @@ get_header(); ?>
 	</div>
 </main>
 
+<?php elseif(is_page('careers')) : ?>
+
+<main>
+	<div class="wrapper">
+
+		<?php
+			// Start the loop.
+			while ( have_posts() ) : the_post();
+
+				// Include the page content template.
+				get_template_part( 'parts/pages/careers' );
+
+				// End of the loop.
+			endwhile;
+		?>
+	
+	</div>
+</main>
+
 <?php else : ?>
 
 <main>
