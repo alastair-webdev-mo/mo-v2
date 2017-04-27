@@ -81,6 +81,7 @@ get_header();
 						    };
 					?>
 				</div>
+				<div id="loading" style="display: none;"><img src="<?php echo admin_url ( 'images/news-loading.gif' ); ?>"/></div>
 				<div class="col">
 					<?php $the_query = new WP_Query( array(
 						'post_type' => 'post',

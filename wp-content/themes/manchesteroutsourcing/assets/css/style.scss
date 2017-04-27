@@ -96,7 +96,7 @@ p, a, ul, ol, blockquote, h1, h2, h3, h4, h5, label, span {
 }
 
 .main__cta p {
-	font-size: $xl;
+	font-size: $l;
 }
 
 .main__cta h2, .main__cta p {
@@ -1213,7 +1213,7 @@ h3.background span {
 }
 
 .col--text p {
-	font-size: $l;
+	font-size: $m;
 	padding-right: 30px;
 }
 
@@ -1699,6 +1699,11 @@ span+a button {
 
 .news__wrapper {
 	padding-bottom: 35px;
+}
+
+#loading {
+	padding: 35px 0;
+    text-align: center;
 }
 
 #ajax-load-more {

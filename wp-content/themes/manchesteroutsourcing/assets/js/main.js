@@ -283,7 +283,7 @@ function cat_ajax_get(catID) {
     jQuery("a.ajax").removeClass("current");
     jQuery("a.ajax").addClass("current");
     jQuery(".news__main .col").empty();
-    jQuery("#loading-animation").show();
+    jQuery("#loading").show();
     var ajaxurl = '/wp-admin/admin-ajax.php';
     jQuery.ajax({
         type: 'POST',
@@ -291,7 +291,7 @@ function cat_ajax_get(catID) {
         data: {"action": "load-filter", cat: catID },
         success: function(response) {
             jQuery(".news__main .col").html(response);
-            jQuery("#loading-animation").hide();
+            jQuery("#loading").hide();
             return false;
         }
     });

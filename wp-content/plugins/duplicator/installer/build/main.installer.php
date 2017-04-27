@@ -69,6 +69,9 @@ $GLOBALS['REPLACE_LIST']
 		array_push($GLOBALS['REPLACE_LIST'], array('search' => 'ftps://oldurl/',   'replace' => 'ftps://newurl/'));
   ================================================================================================= */
 
+// Some machines don’t have this set so just do it here.
+date_default_timezone_set('UTC'); 
+
 //COMPARE VALUES
 $GLOBALS['DUPX_DEBUG']		= false;
 $GLOBALS['FW_CREATED']		= '%fwrite_created%';
@@ -117,6 +120,7 @@ $GLOBALS['DBCHARSET_DEFAULT'] = 'utf8';
 $GLOBALS['DBCOLLATE_DEFAULT'] = 'utf8_general_ci';
 $GLOBALS['FAQ_URL'] = 'https://snapcreek.com/duplicator/docs/faqs-tech';
 $GLOBALS['NOW_DATE'] = @date("Y-m-d-H:i:s");
+$GLOBALS['DB_RENAME_PREFIX'] = 'x-bak__';
 
 //UPDATE TABLE SETTINGS
 $GLOBALS['REPLACE_LIST'] = array();
