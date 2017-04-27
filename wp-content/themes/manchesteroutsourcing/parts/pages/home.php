@@ -44,7 +44,7 @@ $hero_leading = get_field('hero_leading_text');
 						</div>
 					</div>
 					<div class="col6 hero__opt hero__opt--v">
-						<a href="/venture-bulding" class="link__opt"></a>
+						<a href="/venture-building" class="link__opt"></a>
 						<div class="opt__header">
 							<p>02</p>
 						</div>

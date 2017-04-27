@@ -1812,7 +1812,7 @@ ul.col--rectangles li:last-child{margin-right:0}
 ul.col--images li{position:relative;overflow:hidden;padding-bottom:10%;margin-right:20px}
 ul.col--images li img{position:absolute;top:0;bottom:0;left:0;right:0;margin:0 auto;height:88px}
 ul.col--images li:last-child{margin:0}
-.banner{position:relative;width:100%;text-align:center;margin-bottom:35px}
+.banner{position:relative;width:100%;text-align:center;margin-top:35px;margin-bottom:35px}
 .banner .banner__padding{padding:35px 0}
 .banner--padding .banner__padding{padding:35px 250px}
 .banner h2{font-size:42px;text-transform:uppercase;line-height:42px;margin-bottom:10px}
@@ -1840,6 +1840,8 @@ h3.background span{background-color:#000;padding:5px 20px 5px 110px}
 .grid-item h3{color:#222;font-size:24px;text-transform:uppercase;margin-bottom:20px;padding-right:80px}
 .grid-item p{color:#222;font-size:18px;padding-right:80px}
 .grid-item iframe{width:100%}
+.grid-item-img-full{position:relative;overflow:hidden}
+.grid-item-img-full img{position:absolute;top:0;left:0;width:100%}
 .grid-item:nth-child(1){background-color:#f4f6fa}
 .grid-item:nth-child(2){background-color:#fff}
 .grid-item:nth-child(3){background-color:#fff}

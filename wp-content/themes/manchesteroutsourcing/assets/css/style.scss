@@ -1108,6 +1108,7 @@ ul.col--images li:last-child {
 	position: relative;
 	width: 100%;
 	text-align: center;
+	margin-top: 35px;
 	margin-bottom: 35px;
 }
 
@@ -1246,6 +1247,18 @@ h3.background span {
 }
 
 .grid-item iframe {
+	width: 100%;
+}
+
+.grid-item-img-full {
+	position: relative;
+    overflow: hidden;
+}
+
+.grid-item-img-full img {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
 }
 
