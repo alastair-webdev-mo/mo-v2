@@ -36,6 +36,8 @@ Text Domain: manchesteroutsourcing
 /* Base */
 @import "partials/base";
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
+
 @lost gutter 20px;
 
 .contain {
@@ -55,8 +57,13 @@ Text Domain: manchesteroutsourcing
 	color: $mo-b;
 }
 
-p, a, ul, ol, blockquote, h1, h2, h3, h4, h5, label, span {
+p, a, ul, ol, blockquote, label, span {
 	font-family: $f;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: $f2;
+	font-weight: 800;
 }
 
 .main__content {
@@ -320,6 +327,10 @@ nav {
 	height: 80px;
 }
 
+nav.nav--home {
+	height: 120px;
+}
+
 .nav__wrapper {
 	height: 80px;
 	display: flex;
@@ -327,9 +338,27 @@ nav {
 	position: relative;
 }
 
+.nav__wrapper--home {
+	flex-wrap: wrap;
+	height: auto;
+	justify-content: center;
+}
+
+.nav__wrapper--home .nav__logo {
+	width: 100%;
+	text-align: center;
+	padding: 20px 0;
+}
+
 .nav__wrapper .nav__menu {
 	flex-grow: 1;
 	margin: 0 100px;
+}
+
+.nav__wrapper--home .nav__menu {
+	flex-grow: 0;
+	margin: 0 100px 0 0;
+	position: relative;
 }
 
 .nav__wrapper .nav__menu ul {
@@ -347,8 +376,14 @@ nav {
 
 .nav__wrapper .nav__menu a {
 	color: $w;
-	font-size: $s;
-	font-weight: 500;
+	font-size: $xxs;
+	font-weight: 700;
+	font-family: $f2;
+	text-transform: uppercase;
+}
+
+.nav__wrapper--home .nav__menu a {
+	font-size: $xs;
 }
 
 .nav__wrapper .nav__menu .current_page_item a {
@@ -364,6 +399,7 @@ nav {
 	font-size: $m;
 	position: relative;
 	top: -4px;
+	opacity: 0.5;
 }
 
 .nav__wrapper .nav__searchbar {
@@ -375,6 +411,11 @@ nav {
 	overflow: hidden;
 	pointer-events: none;
 	transition: $all;
+}
+
+.nav__wrapper--home .nav__searchbar {
+	top: 0;
+	overflow: visible;
 }
 
 .nav__wrapper .nav__searchbar.is__active {
@@ -401,6 +442,10 @@ nav {
   	border-bottom: 1px solid $lg;
 }
 
+.nav__wrapper .nav__searchbar .input--search {
+	margin: 0;
+}
+
 .nav__wrapper .nav__searchbar .input--search:focus {
 	border: 0;
 }
@@ -418,6 +463,12 @@ nav {
 	font-size: $s;
 }
 
+.nav__wrapper--home .nav__searchbar .button {
+    position: relative;
+    left: 130px;
+    top: -4px;
+}
+
 .nav__wrapper .nav__searchbar .button i {
 	position: relative;
     top: -3px;
@@ -431,6 +482,10 @@ nav {
 	height: 80px;
 	position: relative;
 	cursor: pointer;
+}
+
+.nav__wrapper--home .nav__searchbar a.nav__searchclose {
+	height: 20px;
 }
 
 .nav__wrapper .nav__searchbar .close {
@@ -470,7 +525,7 @@ nav {
 }
 
 .hero h2 {
-	font-size: $xxxxl;
+	font-size: $xxxxxl;
 	text-transform: uppercase;
 	font-weight: 800;
 	letter-spacing: -2px;
@@ -478,8 +533,10 @@ nav {
 }
 
 .hero p {
-	font-size: $n;
+	font-size: $l;
+	font-weight: 100;
 	color: $w;
+
 }
 
 .hero__wrapper--home .hero__content {
@@ -487,12 +544,12 @@ nav {
 	top: 40%;
 	left: 50%;
 	transform: translateY(-40%) translateX(-50%);
-	width: 55%;
+	width: 65%;
 	text-align:center;
 }
 
 .hero__wrapper--home .hero__content .highlight {
-	text-decoration: underline;
+	font-weight: 800;
 }
 
 .hero__wrapper--home .hero__bottom {
@@ -537,11 +594,11 @@ nav {
 }
 
 .hero__opt--o {
-	border-bottom: 5px solid $mo-pi;
+	border-bottom: 8px solid $mo-pi;
 }
 
 .hero__opt--v {
-	border-bottom: 5px solid $mo-p;
+	border-bottom: 8px solid $mo-p;
 }
 
 .hero__opt {
@@ -570,7 +627,7 @@ nav {
 }
 
 .hero__opt .opt__header {
-	border-bottom: 1px solid $gy3;
+	border-bottom: 1px solid rgba(150,150,150,0.4);
 }
 
 .hero__opt .opt__products {
@@ -598,9 +655,9 @@ nav {
 	border-right: 0px solid transparent;
 }
 
-.hero__opt .opt__products h4 {
+.hero__opt h4 {
 	color: $gy3;
-	font-size: $xs;
+	font-size: $l;
 	text-transform: uppercase;
 	margin-bottom: 3px;
 	transition: $all;
@@ -624,7 +681,7 @@ nav {
 .button--start {
 	background-color: $mo-g;
 	color: $w;
-	padding: 15px 25px;
+	padding: 20px 25px;
 	margin-top: 25px;
 	font-size: $xs;
 	font-weight: 600;
@@ -632,6 +689,13 @@ nav {
 	letter-spacing: 1px;
 	box-shadow: $shadow;
 	font-family: $f;
+}
+
+.hero__wrapper--home .hero__content .button--start {
+	max-width: 200px;
+	width: 100%;
+	background-color: $w;
+	color: $b;
 }
 
 .col--text .button--start {
@@ -667,19 +731,6 @@ nav {
 	background-blend-mode: multiply;
 	background-size: cover;
 	background-position: center;
-}
-
-.page__top:before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	border-bottom: 750px solid transparent;
-	border-left: 400px solid rgba(0,0,0,0.4);
-	border-right: 50px solid transparent;
-	height: 100%;
-	width: 100%;
-	z-index: 10;
 }
 
 #breadcrumbs {
@@ -751,6 +802,18 @@ nav {
 .box {
 	position: relative;
 	margin-bottom: 35px;
+	opacity: 0;
+	top: 150px;
+}
+
+.box--full {
+	opacity: 1;
+	top: 0;
+}
+
+.no-js .box {
+	opacity: 1!important;
+	top: 0!important;
 }
 
 .box--white {
@@ -816,9 +879,10 @@ nav {
 }
 
 .box p {
-	color: $dark;
+	color: $gy;
 	font-size: $m;
 	margin-bottom: 35px;
+	font-weight: 100;
 }
 
 .box--dark p {
@@ -1219,6 +1283,8 @@ h3.background span {
 
 .col--text p {
 	font-size: $m;
+	font-weight: 100;
+	color: $gy;
 	padding-right: 160px;
 }
 
@@ -1246,9 +1312,10 @@ h3.background span {
 }
 
 .grid-item p {
-	color: $dark;
+	color: $gy;
 	font-size: $m;
 	padding-right: 80px;
+	font-weight: 100;
 }
 
 .grid-item iframe {
@@ -2356,6 +2423,30 @@ fieldset .input__wrap {
     height: 50px;
     display: block;
     margin-bottom: 10px;
+}
+
+textarea {
+	width: 100%;
+	outline: 0;
+	height: 150px;
+	padding: 10px 5px;
+	background: $w;
+	border: 2px solid $b;
+	border-radius: 2px;
+	font-size: $s;
+	resize: none;
+}
+
+textarea.fail {
+	border: 2px solid $r;
+}
+
+fieldset .input__wrap--textarea {
+	height: 100%;
+}
+
+fieldset .input__textarea--resize {
+	resize: initial;
 }
 
 fieldset input:focus {

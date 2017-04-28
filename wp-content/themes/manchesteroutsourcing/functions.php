@@ -663,3 +663,54 @@ function awesome_excerpt($text, $raw_excerpt) {
     return $text;
 }
 add_filter( 'wp_trim_excerpt', 'awesome_excerpt', 10, 2 );
+
+function venform( $atts ) {
+    $v = shortcode_atts( array(
+        'class' => '',
+        'action' => '',
+    ), $atts );
+
+    return '<form class="form '. $atts['class'] .'" action="'. $atts['action'] .'" method="POST">
+	<div class="form__wrapper">
+	<div class="col">
+		<div class="col6">
+			<fieldset>
+				<label class="title">Tell us about your passion for business...</label>
+				<span class="input__wrap--textarea">
+					<textarea id="passion" name="passion" required></textarea>
+				</span>
+			</fieldset>
+			<fieldset>
+				<label class="title">What\'s your vision?</label>
+				<span class="input__wrap--textarea">
+					<textarea id="vision" name="vision" required></textarea>
+				</span>
+			</fieldset>
+		</div>
+		<div class="col6">
+			<fieldset>
+				<label class="title">Full name</label>
+				<span class="input__wrap">
+					<input type="text" id="name" class="input__field" placeholder="What is your full name?" name="full-name" required>
+				</span>
+			</fieldset>
+			<fieldset>
+			<label class="title">Email address</label>
+				<span class="input__wrap">
+					<input type="email" id="email" class="input__field" placeholder="Your email address..." name="email" required>
+				</span>
+			</fieldset>
+			<fieldset>
+			<label class="title">Phone</label>
+				<span class="input__wrap">
+					<input type="tel" id="phone" class="input__field input__phone" placeholder="Best number to contact you on..." name="phone" required>
+				</span>
+			</fieldset>
+		</div>
+	</div>
+	<span class="submit">
+		<button class="button button--blue form__submit" name="submit">It\'s time to work together - Let\'s get started <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+	</span>							
+</div><div id="form-messages"></div></form>';
+}
+add_shortcode( 'venform', 'venform' );

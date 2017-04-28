@@ -5,6 +5,8 @@
 
 $(document).ready(function() {
 
+$('html').removeClass('no-js');
+
 $('a.copy-url').click(function(e) {
   e.preventDefault();
 });
@@ -15,6 +17,23 @@ var clipboard = new Clipboard('.copy-url', {
     return url;
   }
 });
+
+ $(window).scroll( function(){
+        $('.box').not('.box--full').each( function(i){
+            
+            var bottom_of_object = $(this).offset().top + $(this).outerHeight() / 4;
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            
+            /* If the object is completely visible in the window, fade it it */
+            if( bottom_of_window > bottom_of_object ){
+                
+                $(this).animate({'opacity':'1', 'top':'0px'},400);
+                    
+            }
+            
+        }); 
+    
+    });
 
 clipboard.on('success', function(e) {
   var message = "Copied!";

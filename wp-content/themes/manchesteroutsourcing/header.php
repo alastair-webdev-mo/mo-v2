@@ -4,7 +4,7 @@
  *
  */
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="no-js">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,6 +31,17 @@
 
 <body <?php body_class(); ?>>
 
+<?php if(is_page('homepage')) : ?>
+<nav class="nav--home">
+	<div class="contain">
+		<div class="nav__wrapper nav__wrapper--home">
+			<div class="nav__logo"><a href="<?php echo get_home_url(); ?>" class="abso__link"><img src="/wp-content/uploads/2017/04/logo__white@2x.png" width="120"></a></div>
+			<div class="nav__menu"><?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?><div class="nav__searchbar"><?php get_search_form(); ?></div></div>
+			<div class="nav__search"><a class="search"><i class="fa fa-fw fa-lg fa-search" aria-hidden="true"></i></a></div>
+		</div>
+	</div>
+</nav>
+<?php else : ?>
 <nav>
 	<div class="contain">
 		<div class="nav__wrapper">
@@ -41,3 +52,4 @@
 		</div>
 	</div>
 </nav>
+<?php endif; ?>

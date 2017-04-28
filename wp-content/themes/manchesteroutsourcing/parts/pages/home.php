@@ -32,7 +32,7 @@ $hero_leading = get_field('hero_leading_text');
 					<div class="col6 hero__opt hero__opt--o">
 						<a href="/outsourcing/" class="link__opt"></a>
 						<div class="opt__header">
-							<p>01</p>
+							<h4>01</h4>
 						</div>
 						<div class="opt__products">
 							<h4>Outsourcing</h4>
@@ -46,7 +46,7 @@ $hero_leading = get_field('hero_leading_text');
 					<div class="col6 hero__opt hero__opt--v">
 						<a href="/venture-building" class="link__opt"></a>
 						<div class="opt__header">
-							<p>02</p>
+							<h4>02</h4>
 						</div>
 						<div class="opt__products">
 							<h4>Venture Building</h4>
