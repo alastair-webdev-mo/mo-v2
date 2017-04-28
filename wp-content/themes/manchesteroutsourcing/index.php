@@ -6,7 +6,7 @@
 get_header();
 ?>
 
-<main>
+<main class="main__content">
 	<div class="wrapper">
 
 		<div class="page__top page--news" style="background-image:url(<?php echo $url; ?>);">

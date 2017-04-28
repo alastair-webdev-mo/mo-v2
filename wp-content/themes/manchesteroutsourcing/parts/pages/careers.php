@@ -14,6 +14,7 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 ?>
 
 <div class="page__top page--<?php echo $slug; ?>" style="background-image:url(<?php echo $url; ?>);">
+	<div class="bg"></div>
 	<div class="contain">
 		<div class="page__breadcrumbs">
 			<?php if ( is_page() && $post->post_parent ) : ?>

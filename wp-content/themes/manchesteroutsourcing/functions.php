@@ -363,6 +363,15 @@ function box($params,$content=null){
 }
 add_shortcode("box", "box");
 
+function boximg($params,$content=null){
+    extract(shortcode_atts(array(
+    	'class' => '',
+    	'img' => '',
+    ), $params));
+    return '<div class="box '.$class.'" style="background-image:url('.$img.'">'.do_shortcode($content).'</div>';
+}
+add_shortcode("boximg", "boximg");
+
 function col_wrapper($atts,$content,$tag){
 	
 	//collect values, combining passed in values and defaults
@@ -672,22 +681,6 @@ function venform( $atts ) {
 
     return '<form class="form '. $atts['class'] .'" action="'. $atts['action'] .'" method="POST">
 	<div class="form__wrapper">
-	<div class="col">
-		<div class="col6">
-			<fieldset>
-				<label class="title">Tell us about your passion for business...</label>
-				<span class="input__wrap--textarea">
-					<textarea id="passion" name="passion" required></textarea>
-				</span>
-			</fieldset>
-			<fieldset>
-				<label class="title">What\'s your vision?</label>
-				<span class="input__wrap--textarea">
-					<textarea id="vision" name="vision" required></textarea>
-				</span>
-			</fieldset>
-		</div>
-		<div class="col6">
 			<fieldset>
 				<label class="title">Full name</label>
 				<span class="input__wrap">
@@ -706,10 +699,21 @@ function venform( $atts ) {
 					<input type="tel" id="phone" class="input__field input__phone" placeholder="Best number to contact you on..." name="phone" required>
 				</span>
 			</fieldset>
-		</div>
-	</div>
+			<fieldset>
+				<label class="title">Tell us about your passion for business</label>
+				<span class="input__wrap--textarea">
+					<textarea id="passion" name="passion" required></textarea>
+				</span>
+			</fieldset>
+			<fieldset>
+				<label class="title">What\'s your vision?</label>
+				<span class="input__wrap--textarea">
+					<textarea id="vision" name="vision" required></textarea>
+				</span>
+			</fieldset>
 	<span class="submit">
-		<button class="button button--blue form__submit" name="submit">It\'s time to work together - Let\'s get started <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+		<h4>It\'s time to work together</h4>
+		<button class="button button--blue form__submit" name="submit">Let\'s get started <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
 	</span>							
 </div><div id="form-messages"></div></form>';
 }

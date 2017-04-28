@@ -14,6 +14,7 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 ?>
 
 <div class="page__top page--<?php echo $slug; ?>" style="background-image:url(<?php echo $url; ?>);">
+	<div class="bg"></div>
 	<div class="contain">
 		<div class="page__breadcrumbs">
 			<?php if ( is_page() && $post->post_parent ) : ?>
@@ -22,6 +23,10 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 		</div>
 		<div class="page__title">
 			<h2><?php the_title(); ?></h2>
+			<?php if(is_page('venture-building')) : ?>
+			<p>Merging your ideas with your experience</p>
+			<a href="#content__top"><button class="button button--start">Get Started</button></a>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
@@ -168,7 +173,7 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 </div>
 <?php endif; ?>
 
-<?php if (is_page('about-us')) : ?>
+<?php if (is_page( array('about-us', 'venture-building'))  ): ?>
 <div class="main__cta">
 	<div class="contain">
 		<div class="col">

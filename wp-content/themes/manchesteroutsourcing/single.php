@@ -11,7 +11,7 @@ get_header(); ?>
 
 <?php if( get_post_type() === 'job' ) { ?>
 
-<main>
+<main class="main__content">
 	<div class="wrapper">
 		<div class="contain">
 			<div class="col">
@@ -29,7 +29,7 @@ get_header(); ?>
 
 <?php } else { ?>
 
-<main>
+<main class="main__content">
 	<div class="wrapper">
 		<div class="contain">
 			<div class="col">

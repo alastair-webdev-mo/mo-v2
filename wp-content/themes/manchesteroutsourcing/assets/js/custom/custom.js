@@ -11,6 +11,22 @@ $('a.copy-url').click(function(e) {
   e.preventDefault();
 });
 
+$(window).on( 'load', function(){
+  var height = $('.box--image').innerHeight();
+  $('.box--image .col--text.col--right .bg').css('height', height);
+
+  $( ".box--shadow .bg" ).each(function() {
+    var boxHeight = $('.box--shadow').innerHeight();
+    $( this ).css('height', boxHeight);
+  });
+
+  $( ".page__top .bg" ).each(function() {
+    var topHeight = $('.page__top').innerHeight();
+    $( this ).css('height', topHeight);
+  });
+
+});
+
 var url = document.location.href;
 var clipboard = new Clipboard('.copy-url', {
   text: function() {
@@ -18,22 +34,54 @@ var clipboard = new Clipboard('.copy-url', {
   }
 });
 
- $(window).scroll( function(){
-        $('.box').not('.box--full').each( function(i){
-            
-            var bottom_of_object = $(this).offset().top + $(this).outerHeight() / 4;
-            var bottom_of_window = $(window).scrollTop() + $(window).height();
-            
-            /* If the object is completely visible in the window, fade it it */
-            if( bottom_of_window > bottom_of_object ){
-                
-                $(this).animate({'opacity':'1', 'top':'0px'},400);
-                    
-            }
-            
-        }); 
+// Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('.nav--fixed').outerHeight() / 2;
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
     
-    });
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        $('.nav--fixed').removeClass('nav-down').addClass('nav-up');
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('.nav--fixed').removeClass('nav-up').addClass('nav-down');
+        }
+    }
+    
+    lastScrollTop = st;
+}
+
+var stickyTop = $('.main__content').offset().top;
+
+$(window).on( 'scroll', function(){
+        if ($(window).scrollTop() >= stickyTop) {
+            $('.nav--fixed').css({opacity: "1"});
+        } else {
+            $('.nav--fixed').css({opacity: "0"});
+        }
+});
 
 clipboard.on('success', function(e) {
   var message = "Copied!";
