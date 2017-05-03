@@ -15,6 +15,8 @@ $(window).on( 'load', function(){
   var height = $('.box--image').innerHeight();
   $('.box--image .col--text.col--right .bg').css('height', height);
 
+  $('.box--image .col--text .bg').css('height', height);
+
   $( ".box--shadow .bg" ).each(function() {
     var boxHeight = $('.box--shadow').innerHeight();
     $( this ).css('height', boxHeight);

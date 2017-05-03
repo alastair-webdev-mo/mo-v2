@@ -96,6 +96,11 @@ h1, h2, h3, h4, h5 {
 	text-align: center;
 }
 
+.main__content .col--vb h5 {
+	text-transform: uppercase;
+	font-size: $m;
+}
+
 .main__cta {
 	background-color: $mo-db;
 	padding: 60px 0;
@@ -112,6 +117,10 @@ h1, h2, h3, h4, h5 {
 
 .main__cta h2, .main__cta p {
 	color: $w;
+}
+
+img+img {
+	margin-top: 35px;
 }
 
 /* Layout */
@@ -790,11 +799,26 @@ nav .nav__shadow {
 	position: inherit;
 }
 
+.box--image .col--text .bg {
+	position: absolute;
+    top: 0;
+    left: -10%;
+    right: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 60%;
+    z-index: 0;
+    transform: skew(-13deg);
+}
+
+.box--image .col--text > * {
+	position: relative;
+}
+
 .box--image .col--text.col--right .bg {
     position: absolute;
     top: 0;
     left: auto;
-    right: -15%;
+    right: -10%;
     background-color: rgba(255, 255, 255, 0.8);
     width: 60%;
     z-index: 0;
@@ -1003,6 +1027,11 @@ nav .nav__shadow {
 	line-height: 42px;
 }
 
+.box--image h3 {
+	font-size: $xxxxl;
+	line-height: 58px;
+}
+
 .box h2 {
 	font-size: $xxxxl;
 	margin-bottom: 20px;
@@ -1011,7 +1040,7 @@ nav .nav__shadow {
 	line-height: 58px;
 }
 
-.box--dark h3, .box--dark h4 {
+.box--dark h3, .box--dark h4, .box--dark h5 {
 	color: $w;
 }
 
@@ -1445,7 +1474,6 @@ h3.background span {
 
 .col--text {
 	position: relative;
-	padding-bottom: 35px;
 }
 
 .col--text p {
@@ -1455,12 +1483,27 @@ h3.background span {
 	padding-right: 110px;
 }
 
+.col7.col--text p, .col8.col--text p, .col9.col--text p, .col10.col--text p, .col11.col--text p, .col12.col--text p {
+	padding-right: 150px;
+}
+
+
+.col--vb {
+	padding-right: 100px;
+	margin-bottom: 35px;
+}
+
+.box--dark .col--text p {
+	color: $w;
+}
+
 .col--right {
 	text-align: right;
+	float: right!important;
 }
 
 .col--right p {
-	padding-right: 0;
+	padding-right: 0!important;
 	padding-left: 160px;
 }
 
@@ -1785,6 +1828,47 @@ ul.benefits li span {
 	background-color: $w;
 }
 
+.tron {
+	display: inline-block;
+	border: 1px solid $mo-a;
+	border-radius: 4px;
+	color: $mo-a;
+	font-weight: 600;
+	padding: 20px 35px;
+	font-size: $m;
+	margin-bottom: 20px;
+	transition: $all;
+	text-transform: uppercase;
+}
+
+.tron+.tron--text {
+	margin-top: 20px;
+}
+
+.tron h3 {
+	color: $mo-a;
+	font-size: $xxl;
+	font-weight: 700;
+	margin-bottom: 0;
+}
+
+.tron--text h4 {
+	margin-bottom: 0;
+	color: $w;
+}
+
+.tron--white h4 {
+	color: $w;
+}
+
+.tron--text p {
+	color: $mo-a;
+}
+
+.tron--white p {
+	color: $w;
+}
+
 /* Buttons */
 
 .button {
@@ -1857,15 +1941,30 @@ ul.benefits li span {
 	color:$b;
 }
 
+.button--tron {
+	background-color: $mo-a;
+	color: $w;
+	font-weight: 600;
+	padding: 20px 35px;
+	font-size: $m;
+	border: 0;
+	margin-bottom: 20px;
+	transition: $all;
+	text-transform: uppercase;
+}
+
+button i {
+	margin-left: 20px;
+}
+
 span+a button {
 	margin-top: 35px;
 }
 
 .related-pages {
 	background: $b;
-	padding: 35px;
+	padding: 60px 35px;
 	position: relative;
-	margin-top: 35px;
 }
 
 .related-pages h3 {
@@ -1886,6 +1985,8 @@ span+a button {
 }
 
 .related-pages:after {
+	max-width: 1180px;
+    margin: 0 auto;
   	background: $multi;
   	position: absolute;
   	content: '';

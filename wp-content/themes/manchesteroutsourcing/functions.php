@@ -453,7 +453,8 @@ function banner_shortcode( $atts ) {
 			'text' => '',
 			'button_url' => '',
 			'button_text' => '',
-			'button_class' => ''
+			'button_class' => '',
+			'icon' => ''
 		),
 		$atts,
 		'banner'
@@ -464,7 +465,7 @@ function banner_shortcode( $atts ) {
 	         <h2 class="up">' . $atts['title'] . '</h2>
 	         <p>' . $atts['text'] . '</p></span>
 	         <a href="' . $atts['button_url'] . '">
-	         <button class="button '. $atts['button_class'] .'">' . $atts['button_text'] . '</button></a>
+	         <button class="button '. $atts['button_class'] .'">' . $atts['button_text'] . $atts['icon'] . '</button></a>
 	         </div></div>';
 
 }

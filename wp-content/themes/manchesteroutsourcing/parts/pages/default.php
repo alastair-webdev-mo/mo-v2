@@ -65,7 +65,7 @@ $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 	</div>
 	<?php endif; ?>
 	<?php if ( $post->post_parent === 85 ) : ?>
-	<div class="related-pages related-pages--contain">
+	<div class="related-pages">
 		<div class="contain">
 			<h3>Related Pages</h3>
 			<p>Some related pages which may be of interest to you.</p>
